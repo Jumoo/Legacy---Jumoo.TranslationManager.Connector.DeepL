@@ -1,0 +1,29 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <TranslationConnectorDeepLcontentFilesPath>$(MSBuildThisFileDirectory)..\content\App_Plugins\TranslationConnector.DeepL\**\*.*</TranslationConnectorDeepLcontentFilesPath>
+    </PropertyGroup>
+
+    <Target Name="CopyTranslationConnectorDeepLAssets" BeforeTargets="Build">
+        <ItemGroup>
+            <TranslationConnectorDeepLContentFiles Include="$(TranslationConnectorDeepLContentFilesPath)" />
+        </ItemGroup>
+        <Message Text="Copying TranslationConnector.DeepL files: $(TranslationConnectorDeepLContentFilesPath) - #@(TranslationConnectorDeepLContentFiles->Count()) files"  Importance="high" />
+		<Message Text="Error copying the TranslationConnector.DeepL files" Importance="high"
+				 Condition="@(TranslationConnectorDeepLContentFiles->Count()) == 0"></Message>
+        <Copy
+            SourceFiles="@(TranslationConnectorDeepLContentFiles)"
+            DestinationFiles="@(TranslationConnectorDeepLContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\TranslationConnector.DeepL\%(RecursiveDir)%(Filename)%(Extension)')"
+            SkipUnchangedFiles="true" />
+
+    </Target>
+
+    <Target Name="ClearTranslationConnectorDeepLAssets" BeforeTargets="Clean">
+        <ItemGroup>
+            <TranslationConnectorDeepLDir Include="$(MSBuildProjectDirectory)\App_Plugins\TranslationConnector.DeepL\" />
+        </ItemGroup>
+        <Message Text="Clear old TranslationConnector.DeepL data"  Importance="high" />
+        <RemoveDir Directories="@(TranslationConnectorDeepLDir)"  />
+    </Target>
+
+</Project>

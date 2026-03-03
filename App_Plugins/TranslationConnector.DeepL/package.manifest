@@ -1,0 +1,6 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/TranslationConnector.DeepL/deepLConfig.Controller.js",
+    "~/App_Plugins/TranslationConnector.DeepL/deepLPendingController.js"
+  ]
+}

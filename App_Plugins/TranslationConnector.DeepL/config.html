@@ -1,0 +1,72 @@
+﻿<div ng-controller="translate.deepLProviderController as pvm">
+    <div class="tm-umb-layout">
+        <div class="tm-umb-box tm-umb-box-twothird">
+            <umb-box>
+                <umb-box-header title="Translation Config"
+                                description="In order to use the DeepL Translation API, you will need to supply an API Key - this key is then used to translate via your DeepL Account.">
+                </umb-box-header>
+                <umb-box-content>
+                    <div class="form-horizontal">
+                        <umb-control-group label="Api Key" description="DeepL API Key">
+                            <input type="text" ng-model="vm.settings.apiKey" class="umb-property-editor umb-textstring textstring" />
+                        </umb-control-group>
+
+                        <umb-control-group label="Use Free Api" description="Use the Free or Pro API endpoint">
+                            <umb-toggle checked="vm.settings.useFree == true"
+                                        on-click="vm.settings.useFree = !vm.settings.useFree"
+                                        show-labels="true"
+                                        label-on="Use the Free Api"
+                                        label-off="use the Pro Api (Charged)"
+                                        label-position="right">
+                            </umb-toggle>
+                        </umb-control-group>
+
+
+                        <umb-control-group label="Throttle" description="Number of milliseconds to wait between calls (To Avoid API Throttling)">
+                            <input type="number" ng-model="vm.settings.throttle" class="umb-property-editor umb-textstring textstring" />
+                        </umb-control-group>
+
+                        <!-- split or not -->
+                        <umb-control-group label="Split Html" description="Split any HTML before sending to translation">
+                            <umb-toggle checked="vm.settings.split == true"
+                                        on-click="vm.settings.split = !vm.settings.split"
+                                        show-labels="true"
+                                        label-on="Split HTML into blocks before translating"
+                                        label-off="translate HTML as a single block"
+                                        label-position="right">
+                            </umb-toggle>
+                        </umb-control-group>
+
+                        <umb-control-group label="Send as Html" description="Make sure html elments are marked as html when sent to translation">
+                            <umb-toggle checked="vm.settings.asHtml"
+                                        on-click="vm.settings.asHtml = !vm.settings.asHtml"
+                                        show-labels="true"
+                                        label-on="Tell API to treat richtext markup as html"
+                                        label-off="All text (even html) is sent as plain text"
+                                        label-position="right">
+                            </umb-toggle>
+                        </umb-control-group>
+
+                    </div>
+                </umb-box-content>
+            </umb-box>
+        </div>
+
+        <div class="tm-umb-box tm-umb-box-third">
+            <umb-box>
+                <umb-box-header title="DeepL Translation Api Connector"
+                                description="Machine translation"></umb-box-header>
+                <umb-box-content>
+                    <p>
+                        DeepL offers enhached machine translation. 
+                    </p>
+                    <p>
+                        With DeepL’s advanced features, you can simplify your workflow, save valuable time, and scale your translation needs without compromising on translation quality.
+                    </p>
+
+                    <p><a href="https://www.deepl.com/features/" target="_blank" class="btn btn-link">See the DeepL site for More Information</a></p>
+                </umb-box-content>
+            </umb-box>
+        </div>
+    </div>
+</div>

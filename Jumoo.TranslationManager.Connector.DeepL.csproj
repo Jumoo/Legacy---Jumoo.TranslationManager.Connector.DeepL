@@ -1,0 +1,79 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net472</TargetFrameworks>
+
+		<Product>Jumoo.TranslationManager.Connector.DeepL</Product>
+		<PackageId>Jumoo.TranslationManager.Connector.DeepL</PackageId>
+
+		<Title>Connector for DeepL Translation Api for Translation Manager</Title>
+		<Authors>Kevin Jump</Authors>
+		<Company>Jumoo</Company>
+
+		<PackageIconUrl></PackageIconUrl>
+		<PackageLicenceExpression></PackageLicenceExpression>
+		<PackageProjectUrl>https://jumoo.co.uk/translate</PackageProjectUrl>
+		<PackageTags>Umbraco</PackageTags>
+
+		<Copyright>Jumoo @ 2017-2021</Copyright>
+
+		<Description>DeepL Translation Api Connector for Translation Manager for Umbraco</Description>
+		<PackageReleaseNotes>
+			<![CDATA[
+			9.0.0. Translation Manager v9 version
+			9.1.8-unsupported - unsupported release with new DeepL libraries.]]>
+		</PackageReleaseNotes>
+
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>false</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+	</PropertyGroup>
+
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+		<PackageReference Include="UmbracoCms.Web" version="8.4.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DeepL.net" Version="1.17.0" />
+			<PackageReference Include="Jumoo.TranslationManager.Core" Version="9.1.5" />
+		<!-- 
+			<ProjectReference Include="..\Jumoo.TranslationManager.Core\Jumoo.TranslationManager.Core.csproj" /> 
+		-->
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="build\**\*.*">
+			<Pack>true</Pack>
+			<PackagePath>buildTransitive</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="App_Plugins\TranslationConnector.DeepL\**\*.*">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="App_Plugins\TranslationConnector.DeepL\config.html" />
+	  <None Remove="App_Plugins\TranslationConnector.DeepL\deepLConfig.Controller.js" />
+	  <None Remove="App_Plugins\TranslationConnector.DeepL\deepLPendingController.js" />
+	  <None Remove="App_Plugins\TranslationConnector.DeepL\package.manifest" />
+	  <None Remove="App_Plugins\TranslationConnector.DeepL\pending.html" />
+	</ItemGroup>
+
+	<!-- Workaround for this bug (replace the analyzer name with the one you need to exclude (filename only, no extension) -->
+	<Target Name="RemoveLuceneAnalyzer" BeforeTargets="CoreCompile">
+		<ItemGroup>
+			<Analyzer Remove="@(Analyzer)" Condition="%(FileName) == 'Lucene.Net.CodeAnalysis.CSharp'" />
+		</ItemGroup>
+	</Target>
+
+</Project>
